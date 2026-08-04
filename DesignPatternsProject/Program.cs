@@ -4,6 +4,7 @@ using DesignPatternsProject.Observer.Models;
 using DesignPatternsProject.Strategy;
 using DesignPatternsProject.Strategy.PaymentStrategies;
 using DesignPatternsProject.Strategy.PricingStrategies;
+using DesignPatternsProject.Template;
 
 namespace DesignPatternsProject
 {
@@ -11,23 +12,9 @@ namespace DesignPatternsProject
     {
         static void Main(string[] args)
         {
-            SProduct wallet = new SProduct(name: "Wallet", price: 5000, new RegularPricingStrategy());
+            DocumentProcessor processor = new PDFProcessor();
 
-            double walletprice = wallet.CalculatePrice();
-            Console.WriteLine(walletprice);
-
-
-            SProduct mobile = new SProduct(name: "mobile", price: 2000, new GoldPricingStrategy());
-
-            double mobileprice = mobile.CalculatePrice();
-            Console.WriteLine(mobileprice);
-
-            Checkout MasterCardcheckout = new Checkout(new MasterCardPaymentStrategy());
-            Checkout VisaCardCheckout = new Checkout(new VisaPaymentStrategy());
-
-            MasterCardcheckout.PaymentProcessing(mobileprice);
-            VisaCardCheckout.PaymentProcessing(walletprice);
-
+            processor.ProcessDocument();
 
         }
     }
