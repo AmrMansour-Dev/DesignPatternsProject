@@ -1,6 +1,9 @@
 ﻿using DesignPatternsProject.Observer;
 using DesignPatternsProject.Observer.Enum;
 using DesignPatternsProject.Observer.Models;
+using DesignPatternsProject.Strategy;
+using DesignPatternsProject.Strategy.PaymentStrategies;
+using DesignPatternsProject.Strategy.PricingStrategies;
 
 namespace DesignPatternsProject
 {
@@ -8,16 +11,24 @@ namespace DesignPatternsProject
     {
         static void Main(string[] args)
         {
-            OnlineMarketPlace onlineMarketPlace = new OnlineMarketPlace();
+            SProduct wallet = new SProduct(name: "Wallet", price: 5000, new RegularPricingStrategy());
 
-            Customer customer1 = new Customer(name:"Amr");
-            Customer customer2 = new Customer(name: "Ahmed");
+            double walletprice = wallet.CalculatePrice();
+            Console.WriteLine(walletprice);
 
-            onlineMarketPlace.Subscribe(EventType.New_Product, customer1);
-            onlineMarketPlace.Subscribe(EventType.New_Offer, customer2);
 
-            onlineMarketPlace.AddProduct(new Product(name: "Iphone 18", 156000));
-            onlineMarketPlace.AddOffer(new Offer(message: "Buy 1 get 1"));
+            SProduct mobile = new SProduct(name: "mobile", price: 2000, new GoldPricingStrategy());
+
+            double mobileprice = mobile.CalculatePrice();
+            Console.WriteLine(mobileprice);
+
+            Checkout MasterCardcheckout = new Checkout(new MasterCardPaymentStrategy());
+            Checkout VisaCardCheckout = new Checkout(new VisaPaymentStrategy());
+
+            MasterCardcheckout.PaymentProcessing(mobileprice);
+            VisaCardCheckout.PaymentProcessing(walletprice);
+
+
         }
     }
 }
