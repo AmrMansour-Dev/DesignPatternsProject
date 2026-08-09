@@ -1,4 +1,6 @@
-﻿using DesignPatternsProject.Momento;
+﻿using DesignPatternsProject.Iterator;
+using DesignPatternsProject.Iterator.Interfaces;
+using DesignPatternsProject.Momento;
 using DesignPatternsProject.Observer;
 using DesignPatternsProject.Observer.Enum;
 using DesignPatternsProject.Observer.Models;
@@ -13,28 +15,17 @@ namespace DesignPatternsProject
     {
         static void Main(string[] args)
         {
-            Player player1 = new Player(health: 100, coins: 10, level: 10);
+           StudentCollection students = new StudentCollection();
 
-            PlayerMomento momento1 =  player1.Save();
+           IIterator<Student> iterator = students.CreateIterator();
 
-            CareTaker careTaker = new CareTaker();
-            careTaker.playerMomentos.Add(momento1);
+           while(iterator.HasNext())
+            {
 
-            player1.TakeDamage();
-            player1.TakeCoins();
+                var next = iterator.Next();
 
-            Console.WriteLine(player1.Coins);
-            Console.WriteLine(player1.Health);
-
-            player1.Restore(momento1);
-
-            Console.WriteLine(player1.Coins);
-            Console.WriteLine(player1.Health);
-
-            player1.TakeCoins();
-            PlayerMomento momento2 = player1.Save();
-
-            careTaker.playerMomentos.Add(momento2);
+                Console.WriteLine(next.Name);
+            }
 
 
         }

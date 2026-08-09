@@ -9,6 +9,11 @@ namespace DesignPatternsProject.Visitor
 {
     internal class RemoteWorkScheduleManagement : IScheduleManagement
     {
+        public void Accept(IScheduleManagementVisitor scheduleManagementVisitor)
+        {
+            scheduleManagementVisitor.Visit(this);
+        }
+
         public void CalculateOverTime()
         {
             Console.WriteLine("Calculating OverTime for Remote Work Shift");
