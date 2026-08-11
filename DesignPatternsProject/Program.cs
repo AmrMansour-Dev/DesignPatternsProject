@@ -6,6 +6,7 @@ using DesignPatternsProject.Momento;
 using DesignPatternsProject.Observer;
 using DesignPatternsProject.Observer.Enum;
 using DesignPatternsProject.Observer.Models;
+using DesignPatternsProject.State;
 using DesignPatternsProject.Strategy;
 using DesignPatternsProject.Strategy.PaymentStrategies;
 using DesignPatternsProject.Strategy.PricingStrategies;
@@ -17,16 +18,14 @@ namespace DesignPatternsProject
     {
         static void Main(string[] args)
         {
-            IExpenseHandler teamLeader = new TeamLeader();
-            IExpenseHandler manager = new Manager();
-            IExpenseHandler director = new Director();
+            Order order = new Order(Name: "AC Cond", Price: 27500);
 
-            teamLeader.setNext(manager);
-            manager.setNext(director);
+            OrderManagement orderManagement = new OrderManagement(order);
 
-            ExpenseRequest request = new ExpenseRequest(EmployeeName: "Amr", Amount: 36000);
+            orderManagement.ProcessOrder();
+            orderManagement.ShipOrder();
+            orderManagement.DeliverOrder();
 
-            teamLeader.Handle(request);
 
         }
     }
