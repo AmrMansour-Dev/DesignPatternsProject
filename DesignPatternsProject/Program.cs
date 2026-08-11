@@ -1,4 +1,6 @@
-﻿using DesignPatternsProject.Iterator;
+﻿using DesignPatternsProject.ChainOfResponsibility;
+using DesignPatternsProject.ChainOfResponsibility.Interfaces;
+using DesignPatternsProject.Iterator;
 using DesignPatternsProject.Iterator.Interfaces;
 using DesignPatternsProject.Momento;
 using DesignPatternsProject.Observer;
@@ -15,18 +17,16 @@ namespace DesignPatternsProject
     {
         static void Main(string[] args)
         {
-           StudentCollection students = new StudentCollection();
+            IExpenseHandler teamLeader = new TeamLeader();
+            IExpenseHandler manager = new Manager();
+            IExpenseHandler director = new Director();
 
-           IIterator<Student> iterator = students.CreateIterator();
+            teamLeader.setNext(manager);
+            manager.setNext(director);
 
-           while(iterator.HasNext())
-            {
+            ExpenseRequest request = new ExpenseRequest(EmployeeName: "Amr", Amount: 36000);
 
-                var next = iterator.Next();
-
-                Console.WriteLine(next.Name);
-            }
-
+            teamLeader.Handle(request);
 
         }
     }
