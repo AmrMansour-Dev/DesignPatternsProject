@@ -2,6 +2,8 @@
 using DesignPatternsProject.ChainOfResponsibility.Interfaces;
 using DesignPatternsProject.Iterator;
 using DesignPatternsProject.Iterator.Interfaces;
+using DesignPatternsProject.Mediator;
+using DesignPatternsProject.Mediator.Interfaces;
 using DesignPatternsProject.Momento;
 using DesignPatternsProject.Observer;
 using DesignPatternsProject.Observer.Enum;
@@ -18,14 +20,21 @@ namespace DesignPatternsProject
     {
         static void Main(string[] args)
         {
-            Order order = new Order(Name: "AC Cond", Price: 27500);
+            IChatMediator ChatGroup = new ChatMediator();
+            User User1 = new User("Amr",ChatGroup);
+            User User2 = new User("Ahmed", ChatGroup);
+            User User3 = new User("Sally", ChatGroup);
+            User User4 = new User("hOKA", ChatGroup);
 
-            OrderManagement orderManagement = new OrderManagement(order);
+            ChatGroup.AddUser(User1);
+            ChatGroup.AddUser(User2);
+            ChatGroup.AddUser(User3);
+            ChatGroup.AddUser(User4);
 
-            orderManagement.ProcessOrder();
-            orderManagement.ShipOrder();
-            orderManagement.DeliverOrder();
+            User1.SendMessage("Saba7o ya rgala");
 
+
+            //User1.SendMessage("Hello", User2);
 
         }
     }
