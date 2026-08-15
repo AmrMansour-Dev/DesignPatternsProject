@@ -1,4 +1,5 @@
-﻿using DesignPatternsProject.ChainOfResponsibility;
+﻿using DesignPatternsProject.Adapter;
+using DesignPatternsProject.ChainOfResponsibility;
 using DesignPatternsProject.ChainOfResponsibility.Interfaces;
 using DesignPatternsProject.Iterator;
 using DesignPatternsProject.Iterator.Interfaces;
@@ -20,21 +21,9 @@ namespace DesignPatternsProject
     {
         static void Main(string[] args)
         {
-            IChatMediator ChatGroup = new ChatMediator();
-            User User1 = new User("Amr",ChatGroup);
-            User User2 = new User("Ahmed", ChatGroup);
-            User User3 = new User("Sally", ChatGroup);
-            User User4 = new User("hOKA", ChatGroup);
+            OrderService Order1 = new OrderService(new SMSAdapter(new SMSProvider()));
 
-            ChatGroup.AddUser(User1);
-            ChatGroup.AddUser(User2);
-            ChatGroup.AddUser(User3);
-            ChatGroup.AddUser(User4);
-
-            User1.SendMessage("Saba7o ya rgala");
-
-
-            //User1.SendMessage("Hello", User2);
+            Order1.PlaceOrder();
 
         }
     }
