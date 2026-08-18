@@ -1,4 +1,5 @@
 ﻿using DesignPatternsProject.Adapter;
+using DesignPatternsProject.Bridge;
 using DesignPatternsProject.ChainOfResponsibility;
 using DesignPatternsProject.ChainOfResponsibility.Interfaces;
 using DesignPatternsProject.Iterator;
@@ -21,10 +22,11 @@ namespace DesignPatternsProject
     {
         static void Main(string[] args)
         {
-            OrderService Order1 = new OrderService(new SMSAdapter(new SMSProvider()));
+            WhatsappSender whatsappSender = new WhatsappSender();
 
-            Order1.PlaceOrder();
+            AlertNotification alertNotification = new AlertNotification(whatsappSender);
 
+            alertNotification.Send("Storage is low!!");
         }
     }
 }
