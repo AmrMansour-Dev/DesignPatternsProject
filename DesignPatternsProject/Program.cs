@@ -3,6 +3,8 @@ using DesignPatternsProject.Bridge;
 using DesignPatternsProject.ChainOfResponsibility;
 using DesignPatternsProject.ChainOfResponsibility.Interfaces;
 using DesignPatternsProject.Composite;
+using DesignPatternsProject.Decorator;
+using DesignPatternsProject.Decorator.Interfaces;
 using DesignPatternsProject.Iterator;
 using DesignPatternsProject.Iterator.Interfaces;
 using DesignPatternsProject.Mediator;
@@ -24,28 +26,15 @@ namespace DesignPatternsProject
     {
         static void Main(string[] args)
         {
-            Composite.File Image = new Composite.File("Salwa.jpg", 5);
-            Composite.File Document = new Composite.File("Presentation.docs", 30);
-            Composite.File PDF = new Composite.File("TITLE.PDF", 50);
+            //Mocha mocha = new Mocha(new Sugar(new Coffe()));
 
-            Folder DocumentsFolder = new Folder("Testing Folder");
+            //Console.WriteLine(mocha.Description()); 
 
-            DocumentsFolder.Add(Document);
-            DocumentsFolder.Add(Image);
-            DocumentsFolder.Add(PDF);
+            IBeverage Coffe1 = new Coffe();
 
-            Composite.File Crack = new Composite.File("Crack.exe", 120);
+            Coffe1 = new Sugar(Coffe1);
 
-            Folder MainFolder = new Folder("Main Folder");
-
-            MainFolder.Add(Crack);
-            MainFolder.Add(DocumentsFolder);
-
-            Console.WriteLine(MainFolder.GetSize());
-
-
-
-
+            Console.WriteLine(Coffe1.Description() + ", Cost :" + Coffe1.Cost()+"$");
         }
     }
 }
