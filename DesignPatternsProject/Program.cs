@@ -5,6 +5,7 @@ using DesignPatternsProject.ChainOfResponsibility.Interfaces;
 using DesignPatternsProject.Composite;
 using DesignPatternsProject.Decorator;
 using DesignPatternsProject.Decorator.Interfaces;
+using DesignPatternsProject.Facade;
 using DesignPatternsProject.Iterator;
 using DesignPatternsProject.Iterator.Interfaces;
 using DesignPatternsProject.Mediator;
@@ -26,15 +27,9 @@ namespace DesignPatternsProject
     {
         static void Main(string[] args)
         {
-            //Mocha mocha = new Mocha(new Sugar(new Coffe()));
+            Client client = new Client();
 
-            //Console.WriteLine(mocha.Description()); 
-
-            IBeverage Coffe1 = new Coffe();
-
-            Coffe1 = new Sugar(Coffe1);
-
-            Console.WriteLine(Coffe1.Description() + ", Cost :" + Coffe1.Cost()+"$");
+            client.BuyProduct(165, 20);
         }
     }
 }
