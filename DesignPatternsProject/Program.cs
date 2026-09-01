@@ -14,6 +14,8 @@ using DesignPatternsProject.Momento;
 using DesignPatternsProject.Observer;
 using DesignPatternsProject.Observer.Enum;
 using DesignPatternsProject.Observer.Models;
+using DesignPatternsProject.Proxy;
+using DesignPatternsProject.Proxy.Interfaces;
 using DesignPatternsProject.State;
 using DesignPatternsProject.Strategy;
 using DesignPatternsProject.Strategy.PaymentStrategies;
@@ -27,9 +29,9 @@ namespace DesignPatternsProject
     {
         static void Main(string[] args)
         {
-            Client client = new Client();
+            Iimage NewImage = new ProxyImage("Ma7moud el tafeh.jpg");
 
-            client.BuyProduct(165, 20);
+            NewImage.Display();
         }
     }
 }
